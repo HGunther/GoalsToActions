@@ -1,0 +1,22 @@
+{
+  "name": "goalstoactions",
+  "version": "0.1.0",
+  "description": "A to do list web app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HGunther/GoalsToActions.git"
+  },
+  "author": "Hans",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HGunther/GoalsToActions/issues"
+  },
+  "homepage": "https://github.com/HGunther/GoalsToActions#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
