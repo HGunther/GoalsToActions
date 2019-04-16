@@ -1,0 +1,7 @@
+<h3>Top Tasks</h3>
+<a *ngFor="let task of tasks" class="col-1-4"
+    routerLink="/detail/{{task.id}}">
+  <div class="module task">
+    <h4>{{task.title}}</h4>
+  </div>
+</a>

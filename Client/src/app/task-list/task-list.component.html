@@ -1,12 +1,8 @@
-<h2>My Tasks</h2>
+<h2>My taskes</h2>
 <ul class="tasks">
-    <li *ngFor="let task of tasks"
-    [class.selected]="task === selectedTask"
-    (click)="onSelect(task)">
-        <span class="badge">{{task.id}}</span> {{task.title}}
-    </li>
+  <li *ngFor="let task of tasks">
+    <a routerLink="/detail/{{task.id}}">
+      <span class="badge">{{task.id}}</span> {{task.title}}
+    </a>
+  </li>
 </ul>
-
-<div *ngIf="selectedTask">
-  <app-task [task]="selectedTask"></app-task>
-</div>

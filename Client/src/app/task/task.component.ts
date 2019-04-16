@@ -1,5 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Task } from '../task';
+import { TaskService }  from '../task.service';
+
 
 @Component({
   selector: 'app-task',
@@ -8,10 +13,27 @@ import { Task } from '../task';
 })
 export class TaskComponent implements OnInit {
   @Input() task: Task;
+  
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private taskService: TaskService,
+    private location: Location
+  ) {}
+  
 
-  ngOnInit() {  }
+  ngOnInit(): void { 
+    this.getTask();
+   }
+
+   getTask(): void {
+     const id = +this.route.snapshot.paramMap.get('id');
+     this.taskService.getTask(id).subscribe(task => this.task = task);
+   }
+
+   goBack(): void {
+    this.location.back();
+  }
 
 
 }
