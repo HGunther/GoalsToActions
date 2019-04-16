@@ -1,31 +1,39 @@
-const http = require('http');
+const express = require('express')
+const app = express()
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer((request, response) => {
-  const {
-    headers,
-    method,
-    url
-  } = request;
+app.get('/', function(req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path)
+    res.status(200).send('You found me!')
+})
 
-  request.on('error', (err) => {
-    console.error(err);
-  }).on('data', (chunk) => {}).on('end', () => {
+// app.get('/app', (req, res) => res.send )
 
-    response.on('error', (err) => {
-      console.error(err);
-    });
+app.get('/api/tasks', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path)
+    res.send({
+        some: 'json'
+    })
+})
 
-    response.statusCode = 200;
-    response.setHeader('Content-Type', 'text/html');
+app.post('/api/tasks', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path)
+    res.send('Got a POST request')
+})
 
-    response.write("Hello world!");
-    response.end();
-  });
-});
+app.put('/api/tasks', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path)
+    res.send('Got a PUT request')
+})
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.delete('/api/tasks', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path)
+    res.send('Got a DELETE request')
+})
+
+
+app.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
 });

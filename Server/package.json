@@ -4,7 +4,8 @@
   "description": "A to do list web app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./min/www"
   },
   "repository": {
     "type": "git",
