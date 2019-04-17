@@ -1,15 +1,12 @@
-// import { TASKS } from './mock-tasks';
-
-// require('TASKS');
-
 const express = require('express')
 const app = express()
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
+const taskDb = require('./taskDb');
 
-const TASKS = [
+const MOCKTASKS = [
     {
       id: 1,
       title: "Finish this app",
@@ -38,7 +35,7 @@ app.get('/', function(req, res) {
 
 app.get('/api/tasks', function (req, res) {
     console.log("Recieved " + req.method +  " at " + req.path);
-    res.send(TASKS);
+    res.send(MOCKTASKS);
 })
 
 app.post('/api/tasks', function (req, res) {
