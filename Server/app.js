@@ -35,7 +35,7 @@ app.get('/', function(req, res) {
 
 app.get('/api/tasks', function (req, res) {
     console.log("Recieved " + req.method +  " at " + req.path);
-    res.send(MOCKTASKS);
+    taskDb.getTasks().then( function(tasks){res.send(tasks)});
 })
 
 app.post('/api/tasks', function (req, res) {

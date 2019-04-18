@@ -4,16 +4,16 @@ const DATABASENAME = 'GoalsToActions';
 const COLLECTIONNAME = 'tasks';
 
 
-module.export = function createDatabase() {
-    MongoClient.connect(url, function (err, client) {
+function createDatabase() {
+    MongoClient.connect(URL, function (err, client) {
         if (err) throw err;
         console.log("Database created!");
         client.close();
     });
 }
 
-module.export = function createCollection() {
-    MongoClient.connect(url, function (err, client) {
+function createCollect() {
+    MongoClient.connect(URL, function (err, client) {
         if (err) throw err;
         var database = client.db(DATABASENAME);
         database.createCollection(COLLECTIONNAME, function (err, res) {
@@ -24,11 +24,36 @@ module.export = function createCollection() {
     });
 }
 
-module.export = function getTasks(){}
-module.export = function getTask(id){}
+function getTasks(){
+    return new Promise( function(resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
+            if (err) throw err;
+            var database = client.db(DATABASENAME);
+            database.collection(COLLECTIONNAME).find({}).toArray(function (err, res) {
+                if (err) throw err;
+                console.log(res);
+                client.close();
+                resolve(res);
+            });
+        });
+    });
+}
 
-module.export = function insertTask(task) {
-    MongoClient.connect(url, function (err, client) {
+function getTask(searchId){
+    MongoClient.connect(URL, function (err, client) {
+        if (err) throw err;
+        var database = client.db(DATABASENAME);
+        var query = { id: searchId };
+        database.collection(COLLECTIONNAME).findOne(query).toArray(function (err, res) {
+            if (err) throw err;
+            console.log(res);
+            client.close();
+        });
+    });
+}
+
+function insertTask(task) {
+    MongoClient.connect(URL, function (err, client) {
         if (err) throw err;
         var database = client.db(DATABASENAME);
         database.collection(COLLECTIONNAME).insertOne(task, function (err, res) {
@@ -39,5 +64,30 @@ module.export = function insertTask(task) {
     });
 }
 
-module.export = function updateTask(task) {}
-module.export = function deleteTask(id) {}
+function updateTask(task) {
+    MongoClient.connect(URL, function (err, client) {
+        if (err) throw err;
+        var database = client.db(DATABASENAME);
+        var query = { id: task.id };
+        database.collection(COLLECTIONNAME).updateOne(query, task, function (err, res) {
+            if (err) throw err;
+            console.log(res);
+            client.close();
+        });
+    });
+}
+
+function deleteTask(searchId) {
+    MongoClient.connect(URL, function (err, client) {
+        if (err) throw err;
+        var database = client.db(DATABASENAME);
+        var query = { id: searchId };
+        database.collection(COLLECTIONNAME).deleteOne(query, function(err, res) {
+            if (err) throw err;
+            console.log("deleted 1 document");
+            client.close();
+        });
+    });
+}
+
+module.exports = { createDatabase, createCollect, getTasks, getTask, insertTask, updateTask, deleteTask };
