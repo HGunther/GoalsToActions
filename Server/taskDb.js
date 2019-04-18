@@ -1,8 +1,8 @@
-var MongoClient = require('mongodb').MongoClient;
+var Mongo = require('mongodb');
+var MongoClient = Mongo.MongoClient;
 const URL = "mongodb://localhost:27017/GoalsToActionsDb";
 const DATABASENAME = 'GoalsToActions';
 const COLLECTIONNAME = 'tasks';
-
 
 function createDatabase() {
     MongoClient.connect(URL, function (err, client) {
@@ -40,14 +40,17 @@ function getTasks(){
 }
 
 function getTask(searchId){
-    MongoClient.connect(URL, function (err, client) {
-        if (err) throw err;
-        var database = client.db(DATABASENAME);
-        var query = { id: searchId };
-        database.collection(COLLECTIONNAME).findOne(query).toArray(function (err, res) {
+    return new Promise( function(resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
-            console.log(res);
-            client.close();
+            var database = client.db(DATABASENAME);
+            var query = { _id: Mongo.ObjectId(searchId) };
+            database.collection(COLLECTIONNAME).findOne(query, function (err, res) {
+                if (err) throw err;
+                console.log(res);
+                client.close();
+                resolve(res);
+            });
         });
     });
 }

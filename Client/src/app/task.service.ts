@@ -20,23 +20,28 @@ export class TaskService {
   }
 
   // private tasksUrl = 'http://localhost:3000/tasks'; // URL to web api
-  private tasksUrl = '/api/tasks'; // URL to web api
+  private serverUrl = '/api'; // URL to web api
 
 
   /** GET tasks from the server */
   getTasks (): Observable<Task[]> {
-    return this.http.get<Task[]>(this.tasksUrl)
+    const url = `${this.serverUrl}/tasks`;
+    return this.http.get<Task[]>(url)
       .pipe(
+        tap(_ => this.log("fetched tasks")),
         catchError(this.handleError<Task[]>('getTasks', []))
       );
   }
   
 
-  getTask(id: number): Observable < Task > {
-    // TODO: send the message _after_ fetching the task
-    this.messageService.add(`TaskService: fetched task id=${id}`);
-    return of(TASKS.find(task => task._id === id));
-  }
+/** GET task by id. Will 404 if id not found */
+getTask(id: string): Observable<Task> {
+  const url = `${this.serverUrl}/task?id=${id}`;
+  return this.http.get<Task>(url).pipe(
+    tap(_ => this.log(`fetched task id=${id}`)),
+    catchError(this.handleError<Task>(`getTask id=${id}`))
+  );
+}
 
 
 

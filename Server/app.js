@@ -38,6 +38,13 @@ app.get('/api/tasks', function (req, res) {
     taskDb.getTasks().then( function(tasks){res.send(tasks)});
 })
 
+app.get('/api/task*', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path);
+
+    id = req.query.id;
+    taskDb.getTask(id).then( function(task){res.send(task)});
+})
+
 app.post('/api/tasks', function (req, res) {
     console.log("Recieved " + req.method +  " at " + req.path)
     res.send('Got a POST request')
@@ -54,7 +61,7 @@ app.delete('/api/tasks', function (req, res) {
 })
 
 app.get('*', function(req, res) {
-    console.log("Recieved " + req.method +  " at " + req.path)
+    console.log("Recieved unknown " + req.method +  " at " + req.path)
     res.status(404).send('You done messed up!');
 })
 
