@@ -1,5 +1,5 @@
 export class Task {
-    id: number;
+    _id: number;
     title: string;
     description: string;
     date_created: Date;
