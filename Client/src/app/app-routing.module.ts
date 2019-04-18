@@ -14,13 +14,13 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { TaskListComponent } from './task-list/task-list.component';
-import { TaskComponent }  from './task/task.component';
+import { TaskDetailComponent }  from './task-detail/task-detail.component';
 import { UnavailableComponent } from './unavailable/unavailable.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: TaskComponent },
+  { path: 'task-detail/:id', component: TaskDetailComponent },
   { path: 'task-list', component: TaskListComponent },
   { path: ':feature-name', component: UnavailableComponent }
 ];

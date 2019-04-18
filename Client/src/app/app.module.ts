@@ -6,11 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
-import { MessagesComponent } from './messages/messages.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessagesComponent } from './messages/messages.component';
+import { UnavailableComponent } from './unavailable/unavailable.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { UnavailableComponent } from './unavailable/unavailable.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UnavailableComponent } from './unavailable/unavailable.component';
     TaskListComponent,
     MessagesComponent,
     DashboardComponent,
-    UnavailableComponent
+    UnavailableComponent,
+    TaskDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,32 +1,4 @@
-<div *ngIf="task">
-    <h2>{{task.title | uppercase}} Details</h2>
-    <div><span>id: </span>{{task._id}}</div>
-    <div>
-      <label>title:
-        <input [(ngModel)]="task.title" placeholder="title"/>
-      </label>
-    </div>
-    <button (click)="goBack()">go back</button>
-  </div>
-
-
-<!-- <div *ngIf="task">     -->
-    <!-- <div style="text-align:left"> -->
-        <!-- <h2>Task Details: {{task.title}}</h2> -->
-        <!-- <div> -->
-            <!-- <span>ID: </span>{{task.id}} -->
-        <!-- </div> -->
-        <!-- <div><label> -->
-                <!-- <b>Title:</b> <input [(ngModel)]="task.title" placeholder="Title" /> -->
-        <!-- </label></div> -->
-        <!-- <div><span>Is Complete: </span>{{task.complete}}</div> -->
-        <!-- <div><label> -->
-                <!-- <b>Description:</b> <input [(ngModel)]="task.description" placeholder="Description" /> -->
-        <!-- </label></div> -->
-        <!-- <div><span>Created: </span>{{task.date_created}}</div> -->
-        <!-- <div><span>Start By: </span>{{task.date_start_by}}</div> -->
-        <!-- <div><span>Due Date: </span>{{task.date_due}}</div> -->
-    <!-- </div>       -->
-    <!-- <button (click)="goBack()">go back</button> -->
-<!-- </div> -->
-
+<div>
+  <p>{{task.title}}</p>
+  <p>{{task.description}}</p>
+</div>

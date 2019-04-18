@@ -1,7 +1,7 @@
 <h2>My tasks</h2>
 <ul class="tasks">
   <li *ngFor="let task of tasks">
-    <a routerLink="/detail/{{task._id}}">
+    <a routerLink="/task-detail/{{task._id}}">
       <span class="badge">{{task._id}}</span> {{task.title}}
     </a>
   </li>
