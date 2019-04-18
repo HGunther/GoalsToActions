@@ -10,6 +10,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { UnavailableComponent } from './unavailable/unavailable.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     TaskComponent,
     TaskListComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    UnavailableComponent
   ],
   imports: [
     BrowserModule,
