@@ -1,4 +1,14 @@
 <h2>My tasks</h2>
+<div>
+    <label>Task name:
+      <input #taskName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(taskName.value); taskName.value=''">
+      add
+    </button>
+  </div>
+
 <ul class="tasks">
   <li *ngFor="let task of tasks">
     <a routerLink="/task-detail/{{task._id}}">

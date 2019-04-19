@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser');
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -27,41 +28,55 @@ const MOCKTASKS = [
     }]
 
 
+app.use(bodyParser.json());
 
+// Home
 app.get('/', function(req, res) {
     console.log("Recieved " + req.method +  " at " + req.path);
     res.status(200).send('You found me!');
 })
 
+// Get Tasks
 app.get('/api/tasks', function (req, res) {
     console.log("Recieved " + req.method +  " at " + req.path);
     taskDb.getTasks().then( function(tasks){res.send(tasks)});
 })
 
+// Get specified task
 app.get('/api/task*', function (req, res) {
     console.log("Recieved " + req.method +  " at " + req.path);
-
     id = req.query.id;
     taskDb.getTask(id).then( function(task){res.send(task)});
 })
 
-app.post('/api/tasks', function (req, res) {
-    console.log("Recieved " + req.method +  " at " + req.path)
-    res.send('Got a POST request')
+// Update task
+app.put('/api/task', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path);
+    var recievedTask = req.body
+    console.log("Updating task");
+    console.log(recievedTask);
+    taskDb.updateTask(recievedTask._id).then( function(updatedTask){res.send(updatedTask)});
 })
 
-app.put('/api/tasks', function (req, res) {
-    console.log("Recieved " + req.method +  " at " + req.path)
-    res.send('Got a PUT request')
+// Add task
+app.post('/api/task', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path);
+    var recievedTask = req.body
+    delete recievedTask._id;
+    console.log(recievedTask);
+    taskDb.insertTask(recievedTask).then( function(newTask){res.send(newTask)});
 })
 
-app.delete('/api/tasks', function (req, res) {
-    console.log("Recieved " + req.method +  " at " + req.path)
-    res.send('Got a DELETE request')
+// Delete task
+app.delete('/api/task*', function (req, res) {
+    console.log("Recieved " + req.method +  " at " + req.path);
+    id = req.query.id;
+    taskDb.deleteTask(id).then( function(){res.send()});
 })
 
+// Default route
 app.get('*', function(req, res) {
-    console.log("Recieved unknown " + req.method +  " at " + req.path)
+    console.log("Recieved unknown " + req.method +  " at " + req.path);
     res.status(404).send('You done messed up!');
 })
 

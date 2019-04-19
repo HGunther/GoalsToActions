@@ -4,7 +4,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import {  HttpClient,  HttpHeaders} from '@angular/common/http';
 
 import {  Task} from './task';
-import {  TASKS} from './mock-tasks';
 
 import {  MessageService} from './message.service';
 
@@ -21,7 +20,6 @@ export class TaskService {
 
   // private tasksUrl = 'http://localhost:3000/tasks'; // URL to web api
   private serverUrl = '/api'; // URL to web api
-
 
   /** GET tasks from the server */
   getTasks (): Observable<Task[]> {
@@ -40,6 +38,29 @@ getTask(id: string): Observable<Task> {
   return this.http.get<Task>(url).pipe(
     tap(_ => this.log(`fetched task id=${id}`)),
     catchError(this.handleError<Task>(`getTask id=${id}`))
+  );
+}
+
+updateTask(task: Task): Observable<any> {
+  const url = `${this.serverUrl}/task`;
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.put(url, task, httpOptions).pipe(
+    tap(_ => this.log(`updated task id=${task._id}`)),
+    catchError(this.handleError<any>('updateTask'))
+  );
+}
+
+/** POST: add a new task to the server */
+addTask (task: Task): Observable<Task> {
+  const url = `${this.serverUrl}/task`;
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.post<Task>(url, task, httpOptions).pipe(
+    tap((newTask: Task) => this.log(`added task w/ id=${newTask._id}`)),
+    catchError(this.handleError<Task>('addTask'))
   );
 }
 

@@ -56,39 +56,48 @@ function getTask(searchId){
 }
 
 function insertTask(task) {
-    MongoClient.connect(URL, function (err, client) {
-        if (err) throw err;
-        var database = client.db(DATABASENAME);
-        database.collection(COLLECTIONNAME).insertOne(task, function (err, res) {
+    return new Promise( function(resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
-            console.log("1 document inserted");
-            client.close();
+            var database = client.db(DATABASENAME);
+            database.collection(COLLECTIONNAME).insertOne(task, function (err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+                client.close();
+                resolve(res['ops'][0]);
+            });
         });
     });
 }
 
 function updateTask(task) {
-    MongoClient.connect(URL, function (err, client) {
-        if (err) throw err;
-        var database = client.db(DATABASENAME);
-        var query = { id: task.id };
-        database.collection(COLLECTIONNAME).updateOne(query, task, function (err, res) {
+    return new Promise( function(resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
-            console.log(res);
-            client.close();
+            var database = client.db(DATABASENAME);
+            var query = { id: task.id };
+            database.collection(COLLECTIONNAME).updateOne(query, task, function (err, res) {
+                if (err) throw err;
+                console.log(res);
+                client.close();
+                resolve(res);
+            });
         });
     });
 }
 
 function deleteTask(searchId) {
-    MongoClient.connect(URL, function (err, client) {
-        if (err) throw err;
-        var database = client.db(DATABASENAME);
-        var query = { id: searchId };
-        database.collection(COLLECTIONNAME).deleteOne(query, function(err, res) {
+    return new Promise( function(resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
-            console.log("deleted 1 document");
-            client.close();
+            var database = client.db(DATABASENAME);
+            var query = { id: searchId };
+            database.collection(COLLECTIONNAME).deleteOne(query, function(err, res) {
+                if (err) throw err;
+                console.log("deleted 1 document");
+                client.close();
+                resolve(res);
+            });
         });
     });
 }

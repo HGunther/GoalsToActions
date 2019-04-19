@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
-import { TASKS } from '../mock-tasks';
 
 @Component({
   selector: 'app-task-list',
@@ -21,5 +20,17 @@ export class TaskListComponent implements OnInit {
   getTasks(): void {
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
+
+  add(title: string): void {
+    title = title.trim();
+    if (!title) { return; }
+    var task = new Task;
+    task.title = title;
+    this.taskService.addTask(task)
+      .subscribe(task => {
+        this.tasks.push(task);
+      });
+  }
+  
 
 }
