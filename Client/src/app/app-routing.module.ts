@@ -12,10 +12,10 @@
 
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { TaskListComponent } from './task-list/task-list.component';
-import { TaskDetailComponent }  from './task-detail/task-detail.component';
-import { UnavailableComponent } from './unavailable/unavailable.component';
+import { DashboardComponent }   from './components/dashboard/dashboard.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskDetailComponent }  from './components/task-detail/task-detail.component';
+import { UnavailableComponent } from './components/unavailable/unavailable.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

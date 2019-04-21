@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TaskComponent } from './task/task.component';
-import { TaskListComponent } from './task-list/task-list.component';
-import { TaskDetailComponent } from './task-detail/task-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { MessagesComponent } from './messages/messages.component';
-import { UnavailableComponent } from './unavailable/unavailable.component';
+import { TaskComponent } from './components/task/task.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskDetailComponent } from './components/task-detail/task-detail.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { UnavailableComponent } from './components/unavailable/unavailable.component';
 
 import { HttpClientModule } from '@angular/common/http';
 

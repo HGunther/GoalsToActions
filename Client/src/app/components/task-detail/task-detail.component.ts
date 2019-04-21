@@ -2,16 +2,16 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Task } from '../task';
-import { TaskService }  from '../task.service';
+import { Task } from '../../task';
+import { TaskService }  from '../../services/task.service';
 
 
 @Component({
-  selector: 'app-task',
-  templateUrl: './task.component.html',
-  styleUrls: ['./task.component.css']
+  selector: 'app-task-detail',
+  templateUrl: './task-detail.component.html',
+  styleUrls: ['./task-detail.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskDetailComponent implements OnInit {
   @Input() task: Task;
   
 
@@ -34,6 +34,12 @@ export class TaskComponent implements OnInit {
    goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    this.taskService.updateTask(this.task)
+      .subscribe(() => this.goBack());
+  }
+ 
 
 
 }
