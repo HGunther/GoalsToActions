@@ -64,6 +64,20 @@ addTask (task: Task): Observable<Task> {
   );
 }
 
+/** DELETE: delete the task from the server */
+deleteTask (task: Task | string): Observable<Task> {
+  const id = typeof task === 'string' ? task : task._id;
+  const url = `${this.serverUrl}/task`;
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  return this.http.delete<Task>(url, httpOptions).pipe(
+    tap(_ => this.log(`deleted task id=${id}`)),
+    catchError(this.handleError<Task>('deleteTask'))
+  );
+}
+
 
 
   /**

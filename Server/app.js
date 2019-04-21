@@ -68,10 +68,10 @@ app.post('/api/task', function (req, res) {
 })
 
 // Delete task
-app.delete('/api/task*', function (req, res) {
+app.delete('/api/task', function (req, res) {
     console.log("Recieved " + req.method +  " at " + req.path);
-    id = req.query.id;
-    taskDb.deleteTask(id).then( function(){res.send()});
+    var recievedTask = req.body;
+    taskDb.deleteTask(recievedTask._id).then( function(){res.send()});
 })
 
 // Default route
