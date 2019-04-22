@@ -78,6 +78,22 @@ deleteTask (task: Task | string): Observable<Task> {
   );
 }
 
+/* GET tasks whose name contains search term */
+searchTasks(term: string): Observable<Task[]> {
+  if (!term.trim()) {
+    // if not search term, return empty task array.
+    return of([]);
+  }
+  const url = `${this.serverUrl}/task?title=${term}`;
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.get<Task[]>(url).pipe(
+    tap(_ => this.log(`found tasks matching "${term}"`)),
+    catchError(this.handleError<Task[]>('searchTasks', []))
+  );
+}
+
 
 
   /**

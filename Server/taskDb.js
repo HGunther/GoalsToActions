@@ -39,7 +39,7 @@ function getTasks(){
     });
 }
 
-function getTask(searchId){
+function getTaskById(searchId){
     return new Promise( function(resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
@@ -102,4 +102,36 @@ function deleteTask(searchId) {
     });
 }
 
-module.exports = { createDatabase, createCollect, getTasks, getTask, insertTask, updateTask, deleteTask };
+function termToRegEx(searchTerm){
+    var pattern = ".*";
+    for (var i = 0; i < searchTerm.length; i++) {
+        var char = searchTerm.charAt(i);
+        if(i != 0){
+            pattern += ".*";
+        }
+        pattern += char;
+    }
+    pattern += ".*";
+    var regex = new RegExp(pattern, "i");
+    return regex;
+}
+
+function searchTasksByTitle(searchTerm){
+    return new Promise( function(resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
+            if (err) throw err;
+            var database = client.db(DATABASENAME);
+            var query = { title: new RegExp("new", "i") };
+            console.log("Searching for " + query);
+            console.log(query);
+            database.collection(COLLECTIONNAME).find(query).toArray(function (err, res) {
+                if (err) throw err;
+                console.log(res);
+                client.close();
+                resolve(res);
+            });
+        });
+    });
+}
+
+module.exports = { createDatabase, createCollect, getTasks, getTaskById, insertTask, updateTask, deleteTask, searchTasksByTitle };

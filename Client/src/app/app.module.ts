@@ -10,6 +10,7 @@ import { TaskDetailComponent } from './components/task-detail/task-detail.compon
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { UnavailableComponent } from './components/unavailable/unavailable.component';
+import { TaskSearchComponent } from './components/task-search/task-search.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     MessagesComponent,
     DashboardComponent,
     UnavailableComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    TaskSearchComponent
   ],
   imports: [
     BrowserModule,
