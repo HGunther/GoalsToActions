@@ -75,8 +75,9 @@ function updateTask(task) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
-            var query = { id: task.id };
-            database.collection(COLLECTIONNAME).updateOne(query, task, function (err, res) {
+            var query = { _id: task._id };
+            var newValues = { $set: task };
+            database.collection(COLLECTIONNAME).updateOne(query, newValues, function (err, res) {
                 if (err) throw err;
                 console.log(res);
                 client.close();
@@ -91,7 +92,7 @@ function deleteTask(searchId) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
-            var query = { id: searchId };
+            var query = { id: Mongo.ObjectId(searchId) };
             database.collection(COLLECTIONNAME).deleteOne(query, function(err, res) {
                 if (err) throw err;
                 console.log("deleted 1 document");

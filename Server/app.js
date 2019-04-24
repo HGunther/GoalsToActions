@@ -53,7 +53,7 @@ app.put('/api/task', function (req, res) {
     var recievedTask = req.body
     console.log("Updating task");
     console.log(recievedTask);
-    taskDb.updateTask(recievedTask._id).then(function (updatedTask) {
+    taskDb.updateTask(recievedTask).then(function (updatedTask) {
         res.send(updatedTask)
     });
 })

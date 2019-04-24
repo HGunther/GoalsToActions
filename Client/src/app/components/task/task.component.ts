@@ -25,4 +25,14 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void { 
    }
 
+   completeTask(){
+     this.task.complete = true;
+     
+   }
+
+   toggleTaskComplete(){
+    this.task.complete = !this.task.complete;
+    this.taskService.updateTask(this.task).subscribe();
+  }
+
 }

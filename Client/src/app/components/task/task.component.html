@@ -1,6 +1,6 @@
 <span class="task">
+  <span class="badgeL" (click)="toggleTaskComplete()">{{task.complete}}</span>
   <a class="task" routerLink="/task-detail/{{task._id}}">
-    <span class="badgeL">{{task.complete}}</span>
     <span class="title">{{task.title}}</span>
     <span class="badgeR">hello</span>
   </a>
