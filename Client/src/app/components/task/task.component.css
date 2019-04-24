@@ -1,31 +1,45 @@
-/* TaskComponent's private CSS styles */
-label {
-    display: inline-block;
-    width: 3em;
-    margin: .5em 0;
-    color: #607D8B;
-    font-weight: bold;
-  }
-  input {
-    height: 2em;
-    font-size: 1em;
-    padding-left: .4em;
-  }
-  button {
-    margin-top: 20px;
-    font-family: Arial;
-    background-color: #eee;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
-  }
-  button:hover {
-    background-color: #cfd8dc;
-  }
-  button:disabled {
-    background-color: #eee;
-    color: #ccc;
-    cursor: auto;
-  }
+.task {
+font-family: verdana;
+}
+
+span.task {
+  background-color: #EEE;
+  border-radius: 4px;
+  padding: 2px 2px 2px 2px;
+}
+
+a.task {
+  color: black;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+a:hover.task  {
+  color: #607D8B;
+  background-color: #DDD;
+}
+ 
+span {
+  position: relative;
+  padding: 2px 4px 2px 4px;
+}
+
+span.badgeL {
+  left: -2px;
+  background-color: #607D8B;
+  color: white;
+  border-radius: 4px 0 0 4px;
+}
+
+span.title {
+}
+
+span.badgeR {
+  /* position: absolute; */
+  right: 0px;
+  /* top: 0px; */
+  background-color: Tomato;
+  color: white;
+  border-radius: 0 4px 4px 0 ;
+}

@@ -11,10 +11,6 @@
 
 <ul class="task-list">
   <li class="task-item" *ngFor="let task of tasks">
-    <a routerLink="/task-detail/{{task._id}}">
-      <span class="badgeL">{{task.complete}}</span>
-      <span class="title">{{task.title}}</span>
-      <span class="badgeR">{{task.date_due}}</span>
-    </a>
+    <app-task [task]=task></app-task>
   </li>
 </ul>

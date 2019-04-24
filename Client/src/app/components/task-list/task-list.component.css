@@ -1,66 +1,13 @@
-body {
-  font-family: verdana;
-}
-
-.task-list{
-font-family: verdana;
-}
-
 ul.task-list{
   list-style-type: none;
-  max-width: 500px;
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
 }
 
 li.task-item{
   position: relative;
-  cursor: pointer;
-  background-color: #EEE;
-  border-radius: 4px;
-  margin: 4px 4px 4px 4px;
-  border: 0px 0px 0px 0px;
-  padding: 2px 2px 2px 2px;
+  margin: 8px 0px 8px 0px;
 }
 
-li:hover.task-item  {
-  color: #607D8B;
-  background-color: #DDD;
-}
-
-.task-list a {
-  padding: 0px 0px 0px 0px;
-  border: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-}
-
-a {
-  color: inherit; /* blue colors for links too */
-  text-decoration: inherit; /* no underline */
-}
- 
-span {
-  position: relative;
-  padding: 2px 4px 2px 4px;
-  border: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-}
-
-span.badgeL {
-  left: -1px;
-  background-color: #607D8B;
-  color: white;
-  border-radius: 4px 0 0 4px;
-}
-
-span.title {
-}
-
-span.badgeR {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  background-color: Tomato;
-  color: white;
-  border-radius: 0 4px 4px 0 ;
+app-task {
 }
