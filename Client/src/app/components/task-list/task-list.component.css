@@ -1,51 +1,66 @@
-/* TaskListComponent's private CSS styles */
-.tasks {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
+body {
+  font-family: verdana;
 }
-.tasks li {
+
+.task-list{
+font-family: verdana;
+}
+
+ul.task-list{
+  list-style-type: none;
+  max-width: 500px;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+li.task-item{
   position: relative;
   cursor: pointer;
   background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
   border-radius: 4px;
+  margin: 4px 4px 4px 4px;
+  border: 0px 0px 0px 0px;
+  padding: 2px 2px 2px 2px;
 }
 
-.tasks li:hover {
+li:hover.task-item  {
   color: #607D8B;
   background-color: #DDD;
-  left: .1em;
 }
 
-.tasks a {
-  color: #888;
-  text-decoration: none;
+.task-list a {
+  padding: 0px 0px 0px 0px;
+  border: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+ 
+span {
   position: relative;
-  display: block;
-  width: 250px;
+  padding: 2px 4px 2px 4px;
+  border: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
-.tasks a:hover {
-  color:#607D8B;
-}
-
-.tasks .badge {
-  display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607D8B;
-  line-height: 1em;
-  position: relative;
+span.badgeL {
   left: -1px;
-  top: -4px;
-  height: 1.8em;
-  min-width: 16px;
-  text-align: right;
-  margin-right: .8em;
+  background-color: #607D8B;
+  color: white;
   border-radius: 4px 0 0 4px;
+}
+
+span.title {
+}
+
+span.badgeR {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-color: Tomato;
+  color: white;
+  border-radius: 0 4px 4px 0 ;
 }

@@ -9,11 +9,12 @@
     </button>
   </div>
 
-<ul class="tasks">
-  <li *ngFor="let task of tasks">
+<ul class="task-list">
+  <li class="task-item" *ngFor="let task of tasks">
     <a routerLink="/task-detail/{{task._id}}">
-      <span class="badge">{{task._id}}</span> {{task.title}}
+      <span class="badgeL">{{task.complete}}</span>
+      <span class="title">{{task.title}}</span>
+      <span class="badgeR">{{task.date_due}}</span>
     </a>
-    <button class="delete" title="delete task" (click)="delete(task)">x</button>
   </li>
 </ul>
