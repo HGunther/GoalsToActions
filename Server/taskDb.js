@@ -107,16 +107,68 @@ function updateTask(task) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
             var query = {
-                _id: task._id
+                _id: Mongo.ObjectId(task._id)
             };
+            delete task._id;
             var newValues = {
                 $set: task
             };
             database.collection(COLLECTIONNAME).updateOne(query, newValues, function (err, res) {
                 if (err) throw err;
-                console.log(res);
+                console.log(res['result']);
                 client.close();
-                resolve(res);
+                resolve(res['result']);
+            });
+        });
+    });
+}
+
+function updateTaskReturnTask(task) {
+    return new Promise(function (resolve, reject) {
+        id = task._id;
+        MongoClient.connect(URL, function (err, client) {
+            if (err) throw err;
+            var database = client.db(DATABASENAME);
+            var query = {
+                _id: Mongo.ObjectId(task._id)
+            };
+            delete task._id;
+            var newValues = {
+                $set: task
+            };
+            database.collection(COLLECTIONNAME).updateOne(query, newValues, function (err, res) {
+                if (err) throw err;
+                database.collection(COLLECTIONNAME).findOne({
+                    _id: Mongo.ObjectId(id)
+                }, function (err, res) {
+                    if (err) throw err;
+                    console.log(res);
+                    client.close();
+                    resolve(res);
+                });
+            });
+        });
+    });
+}
+
+function updateTaskComplete(task) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
+            if (err) throw err;
+            var database = client.db(DATABASENAME);
+            var query = {
+                _id: Mongo.ObjectId(task._id)
+            };
+            var newValues = {
+                $set: {
+                    complete: task.complete
+                }
+            };
+            database.collection(COLLECTIONNAME).updateOne(query, newValues, function (err, res) {
+                if (err) throw err;
+                console.log(res['result']);
+                client.close();
+                resolve(res['result']);
             });
         });
     });
@@ -182,6 +234,8 @@ module.exports = {
     getTaskById,
     insertTask,
     updateTask,
+    updateTaskReturnTask,
+    updateTaskComplete,
     deleteTask,
     searchTasksByTitle
 };

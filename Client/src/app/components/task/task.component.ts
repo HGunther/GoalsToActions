@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Task } from '../../task';
-import { TaskService }  from '../../services/task.service';
+import { TaskService } from '../../services/task.service';
 
 import * as util from "../../utilities";
 
@@ -15,7 +15,7 @@ import * as util from "../../utilities";
 })
 export class TaskComponent implements OnInit {
   @Input() task: Task;
-  
+
   isBeingUpdated: boolean;
 
   constructor(
@@ -25,28 +25,34 @@ export class TaskComponent implements OnInit {
   ) {
     this.isBeingUpdated = false;
   }
-  
 
-  ngOnInit(): void { 
-   }
 
-   completeTask(): void {
-     this.task.complete = true;
-     this.task.date_completed = new Date(Date.now());
-     this.isBeingUpdated = true;
-     this.taskService.updateTask(this.task).subscribe( () => {this.isBeingUpdated = false;} );
-   }
+  ngOnInit(): void {
+  }
 
-   toggleTaskComplete(): void {
-    if (this.task.complete){
+  completeTask(): void {
+    this.task.complete = true;
+    this.task.date_completed = new Date(Date.now());
+    this.isBeingUpdated = true;
+    this.taskService.updateTask(this.task).subscribe((updatedTask) => {
+      this.task = updatedTask;
+      this.isBeingUpdated = false;
+    });
+  }
+
+  toggleTaskComplete(): void {
+    if (this.task.complete) {
       this.task.complete = false;
       this.task.date_completed = new Date();
-    } else{
+    } else {
       this.task.complete = true;
       this.task.date_completed = new Date(Date.now());
     }
     this.isBeingUpdated = true;
-    this.taskService.updateTask(this.task).subscribe( () => {this.isBeingUpdated = false;} );
+    this.taskService.updateTask(this.task).subscribe((updatedTask) => {
+    this.task = updatedTask;
+      this.isBeingUpdated = false;
+    });
   }
 
   daysUntilDue(dueDate: Date): number {
