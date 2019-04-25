@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { Task } from '../../task';
 import { TaskService }  from '../../services/task.service';
 
+import * as util from "../../utilities";
+
 
 @Component({
   selector: 'app-task',
@@ -40,6 +42,11 @@ export class TaskComponent implements OnInit {
       this.task.date_completed = new Date(Date.now());
     }
     this.taskService.updateTask(this.task).subscribe();
+  }
+
+  daysUntilDue(dueDate: Date): number {
+    var dif = new Date(this.task.date_due).getTime() - Date.now();
+    return util.convertMiliseconds(dif, 'd');
   }
 
 }
