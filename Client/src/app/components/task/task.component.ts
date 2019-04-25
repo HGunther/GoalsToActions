@@ -25,13 +25,20 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void { 
    }
 
-   completeTask(){
+   completeTask(): void {
      this.task.complete = true;
-     
+     this.task.date_completed = new Date(Date.now());
+     this.taskService.updateTask(this.task).subscribe();
    }
 
-   toggleTaskComplete(){
-    this.task.complete = !this.task.complete;
+   toggleTaskComplete(): void {
+    if (this.task.complete){
+      this.task.complete = false;
+      this.task.date_completed = new Date();
+    } else{
+      this.task.complete = true;
+      this.task.date_completed = new Date(Date.now());
+    }
     this.taskService.updateTask(this.task).subscribe();
   }
 
