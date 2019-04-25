@@ -13,6 +13,7 @@ import { UnavailableComponent } from './components/unavailable/unavailable.compo
 import { TaskSearchComponent } from './components/task-search/task-search.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     UnavailableComponent,
     TaskDetailComponent,
-    TaskSearchComponent
+    TaskSearchComponent,
+    ToDoListComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskDetailComponent }  from './components/task-detail/task-detail.component';
+import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { UnavailableComponent } from './components/unavailable/unavailable.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'task-detail/:id', component: TaskDetailComponent },
   { path: 'task-list', component: TaskListComponent },
+  { path: 'to-do-list', component: ToDoListComponent },
   { path: ':feature-name', component: UnavailableComponent }
 ];
 

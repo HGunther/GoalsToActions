@@ -1,0 +1,13 @@
+ul.task-list{
+    list-style-type: none;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
+  
+  li.task-item{
+    position: relative;
+    margin: 8px 0px 8px 0px;
+  }
+  
+  app-task {
+  }

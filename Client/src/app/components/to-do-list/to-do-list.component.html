@@ -1,0 +1,16 @@
+<h2>To Do List</h2>
+<div>
+    <label>Task name:
+      <input #taskName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(taskName.value); taskName.value=''">
+      add
+    </button>
+  </div>
+
+<ul class="task-list">
+  <li class="task-item" *ngFor="let task of tasks">
+    <app-task [task]=task></app-task>
+  </li>
+</ul>

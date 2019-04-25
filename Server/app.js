@@ -20,9 +20,16 @@ app.get('/', function (req, res) {
 })
 
 // Get Tasks
-app.get('/api/tasks*', function (req, res) {
+app.get('/api/tasks/all', function (req, res) {
     console.log("Recieved " + req.method + " at " + req.path);
     taskDb.getTasks().then(function (tasks) {
+        res.send(tasks)
+    });
+})
+
+app.get('/api/tasks/to-do', function (req, res) {
+    console.log("Recieved " + req.method + " at " + req.path);
+    taskDb.getToDo().then(function (tasks) {
         res.send(tasks)
     });
 })

@@ -24,8 +24,8 @@ function createCollect() {
     });
 }
 
-function getTasks(){
-    return new Promise( function(resolve, reject) {
+function getTasks() {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
@@ -39,12 +39,43 @@ function getTasks(){
     });
 }
 
-function getTaskById(searchId){
-    return new Promise( function(resolve, reject) {
+function getToDo() {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
-            var query = { _id: Mongo.ObjectId(searchId) };
+            var query = {
+                complete: false,
+                $or: [{
+                        date_start_by: {
+                            $lte: Date.now()
+                        }
+                    },
+                    {
+                        date_due: {
+                            $lte: Date.now()
+                        }
+                    }
+                ]
+            };
+            database.collection(COLLECTIONNAME).find({}).toArray(function (err, res) {
+                if (err) throw err;
+                console.log(res);
+                client.close();
+                resolve(res);
+            });
+        });
+    });
+}
+
+function getTaskById(searchId) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(URL, function (err, client) {
+            if (err) throw err;
+            var database = client.db(DATABASENAME);
+            var query = {
+                _id: Mongo.ObjectId(searchId)
+            };
             database.collection(COLLECTIONNAME).findOne(query, function (err, res) {
                 if (err) throw err;
                 console.log(res);
@@ -56,7 +87,7 @@ function getTaskById(searchId){
 }
 
 function insertTask(task) {
-    return new Promise( function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
@@ -71,12 +102,16 @@ function insertTask(task) {
 }
 
 function updateTask(task) {
-    return new Promise( function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
-            var query = { _id: task._id };
-            var newValues = { $set: task };
+            var query = {
+                _id: task._id
+            };
+            var newValues = {
+                $set: task
+            };
             database.collection(COLLECTIONNAME).updateOne(query, newValues, function (err, res) {
                 if (err) throw err;
                 console.log(res);
@@ -88,12 +123,14 @@ function updateTask(task) {
 }
 
 function deleteTask(searchId) {
-    return new Promise( function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
-            var query = { id: Mongo.ObjectId(searchId) };
-            database.collection(COLLECTIONNAME).deleteOne(query, function(err, res) {
+            var query = {
+                id: Mongo.ObjectId(searchId)
+            };
+            database.collection(COLLECTIONNAME).deleteOne(query, function (err, res) {
                 if (err) throw err;
                 console.log("deleted 1 document");
                 client.close();
@@ -103,11 +140,11 @@ function deleteTask(searchId) {
     });
 }
 
-function termToRegEx(searchTerm){
+function termToRegEx(searchTerm) {
     var pattern = ".*";
     for (var i = 0; i < searchTerm.length; i++) {
         var char = searchTerm.charAt(i);
-        if(i != 0){
+        if (i != 0) {
             pattern += ".*";
         }
         pattern += char;
@@ -117,12 +154,14 @@ function termToRegEx(searchTerm){
     return regex;
 }
 
-function searchTasksByTitle(searchTerm){
-    return new Promise( function(resolve, reject) {
+function searchTasksByTitle(searchTerm) {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(URL, function (err, client) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
-            var query = { title: new RegExp("new", "i") };
+            var query = {
+                title: new RegExp("new", "i")
+            };
             console.log("Searching for " + query);
             console.log(query);
             database.collection(COLLECTIONNAME).find(query).toArray(function (err, res) {
@@ -135,4 +174,14 @@ function searchTasksByTitle(searchTerm){
     });
 }
 
-module.exports = { createDatabase, createCollect, getTasks, getTaskById, insertTask, updateTask, deleteTask, searchTasksByTitle };
+module.exports = {
+    createDatabase,
+    createCollect,
+    getTasks,
+    getToDo,
+    getTaskById,
+    insertTask,
+    updateTask,
+    deleteTask,
+    searchTasksByTitle
+};

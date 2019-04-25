@@ -23,14 +23,13 @@ export class TaskService {
 
   /** GET tasks from the server */
   getTasks (): Observable<Task[]> {
-    const url = `${this.serverUrl}/tasks`;
+    const url = `${this.serverUrl}/tasks/all`;
     return this.http.get<Task[]>(url)
       .pipe(
         tap(_ => this.log("fetched tasks")),
         catchError(this.handleError<Task[]>('getTasks', []))
       );
   }
-  
 
 /** GET task by id. Will 404 if id not found */
 getTask(id: string): Observable<Task> {
@@ -94,6 +93,15 @@ searchTasks(term: string): Observable<Task[]> {
   );
 }
 
+/** GET tasks from the server */
+getToDo (): Observable<Task[]> {
+  const url = `${this.serverUrl}/tasks/to-do`;
+  return this.http.get<Task[]>(url)
+    .pipe(
+      tap(_ => this.log("fetched tasks")),
+      catchError(this.handleError<Task[]>('getTasks', []))
+    );
+}
 
 
   /**
