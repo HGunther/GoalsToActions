@@ -1,5 +1,5 @@
 <span class="task">
-  <span class="badgeL" (click)="toggleTaskComplete()">{{task.complete}}</span>
+  <span class="badgeL" [class.updating]="isBeingUpdated" (click)="toggleTaskComplete()">{{task.complete}}</span>
   <a class="task" routerLink="/task-detail/{{task._id}}">
     <span class="title">{{task.title}}</span>
     <span class="badgeR">{{daysUntilDue()}}</span>

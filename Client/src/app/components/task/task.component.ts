@@ -16,12 +16,15 @@ import * as util from "../../utilities";
 export class TaskComponent implements OnInit {
   @Input() task: Task;
   
+  isBeingUpdated: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
     private location: Location
-  ) {}
+  ) {
+    this.isBeingUpdated = false;
+  }
   
 
   ngOnInit(): void { 
@@ -30,7 +33,8 @@ export class TaskComponent implements OnInit {
    completeTask(): void {
      this.task.complete = true;
      this.task.date_completed = new Date(Date.now());
-     this.taskService.updateTask(this.task).subscribe();
+     this.isBeingUpdated = true;
+     this.taskService.updateTask(this.task).subscribe( () => {this.isBeingUpdated = false;} );
    }
 
    toggleTaskComplete(): void {
@@ -41,7 +45,8 @@ export class TaskComponent implements OnInit {
       this.task.complete = true;
       this.task.date_completed = new Date(Date.now());
     }
-    this.taskService.updateTask(this.task).subscribe();
+    this.isBeingUpdated = true;
+    this.taskService.updateTask(this.task).subscribe( () => {this.isBeingUpdated = false;} );
   }
 
   daysUntilDue(dueDate: Date): number {

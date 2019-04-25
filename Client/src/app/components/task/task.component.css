@@ -32,6 +32,10 @@ span.badgeL {
   border-radius: 4px 0 0 4px;
 }
 
+span.updating {
+  background-color: darkorange;
+}
+
 span.title {
 }
 
