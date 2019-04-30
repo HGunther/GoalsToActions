@@ -193,7 +193,7 @@ function deleteTask(searchId) {
 }
 
 function termToRegEx(searchTerm) {
-    var pattern = ".*";
+    var pattern = "";
     for (var i = 0; i < searchTerm.length; i++) {
         var char = searchTerm.charAt(i);
         if (i != 0) {
@@ -201,7 +201,7 @@ function termToRegEx(searchTerm) {
         }
         pattern += char;
     }
-    pattern += ".*";
+    // pattern += ".*";
     var regex = new RegExp(pattern, "i");
     return regex;
 }
@@ -212,7 +212,7 @@ function searchTasksByTitle(searchTerm) {
             if (err) throw err;
             var database = client.db(DATABASENAME);
             var query = {
-                title: new RegExp("new", "i")
+                title: termToRegEx(searchTerm)
             };
             console.log("Searching for " + query);
             console.log(query);
