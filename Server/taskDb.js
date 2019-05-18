@@ -58,7 +58,12 @@ function getToDo() {
                     }
                 ]
             };
-            database.collection(COLLECTIONNAME).find({}).toArray(function (err, res) {
+            console.log( new Date( Date.now()).toDateString());
+            database.collection(COLLECTIONNAME).find({
+                date_start_by: {
+                    $lte: new Date( Date.now())
+                }
+            }).toArray(function (err, res) {
                 if (err) throw err;
                 console.log(res);
                 client.close();
