@@ -1,10 +1,39 @@
 <div *ngIf="task">
   <h2>{{task.title | uppercase}} Details</h2>
-  <div><span>id: </span>{{task._id}}</div>
   <div>
-    <label>title:
-      <input [(ngModel)]="task.title" placeholder="title"/>
-    </label>
+    <div>
+      <label>id: </label>{{task._id}}
+    </div>
+    <div>
+      <label>title:
+        <input [(ngModel)]="task.title" placeholder="title" />
+      </label>
+    </div>
+    <div>
+      <label>description:
+        <input [(ngModel)]="task.description" placeholder="description" />
+      </label>
+    </div>
+    <div>
+      <label>date_created:
+        <input [(ngModel)]="task.date_created" placeholder="" />
+      </label>
+    </div>
+    <div>
+      <label>date_due:
+        <input [(ngModel)]="task.date_due" placeholder="" />
+      </label>
+    </div>
+    <div>
+      <label>date_start_by:
+        <input [(ngModel)]="task.date_start_by" placeholder="date_start_by" />
+      </label>
+    </div>
+    <div *ngIf="task.date_completed">
+        <label>date_completed:
+          <input [(ngModel)]="task.date_completed" placeholder="" />
+        </label>
+      </div>
   </div>
   <button (click)="save()">save</button>
   <button (click)="goBack()">go back</button>
@@ -12,22 +41,21 @@
 
 
 <!-- <div *ngIf="task">     -->
-  <!-- <div style="text-align:left"> -->
-      <!-- <h2>Task Details: {{task.title}}</h2> -->
-      <!-- <div> -->
-          <!-- <span>ID: </span>{{task.id}} -->
-      <!-- </div> -->
-      <!-- <div><label> -->
-              <!-- <b>Title:</b> <input [(ngModel)]="task.title" placeholder="Title" /> -->
-      <!-- </label></div> -->
-      <!-- <div><span>Is Complete: </span>{{task.complete}}</div> -->
-      <!-- <div><label> -->
-              <!-- <b>Description:</b> <input [(ngModel)]="task.description" placeholder="Description" /> -->
-      <!-- </label></div> -->
-      <!-- <div><span>Created: </span>{{task.date_created}}</div> -->
-      <!-- <div><span>Start By: </span>{{task.date_start_by}}</div> -->
-      <!-- <div><span>Due Date: </span>{{task.date_due}}</div> -->
-  <!-- </div>       -->
-  <!-- <button (click)="goBack()">go back</button> -->
+<!-- <div style="text-align:left"> -->
+<!-- <h2>Task Details: {{task.title}}</h2> -->
+<!-- <div> -->
+<!-- <span>ID: </span>{{task.id}} -->
 <!-- </div> -->
-
+<!-- <div><label> -->
+<!-- <b>Title:</b> <input [(ngModel)]="task.title" placeholder="Title" /> -->
+<!-- </label></div> -->
+<!-- <div><span>Is Complete: </span>{{task.complete}}</div> -->
+<!-- <div><label> -->
+<!-- <b>Description:</b> <input [(ngModel)]="task.description" placeholder="Description" /> -->
+<!-- </label></div> -->
+<!-- <div><span>Created: </span>{{task.date_created}}</div> -->
+<!-- <div><span>Start By: </span>{{task.date_start_by}}</div> -->
+<!-- <div><span>Due Date: </span>{{task.date_due}}</div> -->
+<!-- </div>       -->
+<!-- <button (click)="goBack()">go back</button> -->
+<!-- </div> -->
